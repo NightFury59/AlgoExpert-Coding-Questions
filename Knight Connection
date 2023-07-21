@@ -5,7 +5,7 @@ Solution -
 import math
 
 def knightConnection(knightA, knightB):
-    possibleMoves = [[-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2. -1]]
+    possibleMoves = [[-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1]]
 
     queue = [[knightA[0], knightA[1], 0]]
     visited = {positionToString(knightA)}
