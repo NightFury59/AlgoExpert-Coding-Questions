@@ -1,6 +1,6 @@
 Solution -
 
-Time Complexity O(w^2 * h) | Space Complexity O(w)
+#Time Complexity O(w^2 * h) | Space Complexity O(w)
 
 def waterfallStreams(array, source):
     rowAbove = array[0][:]
