@@ -1,0 +1,29 @@
+Solution - 
+
+# Time Complexity O(n) | Space Complexity O(h)
+def repairBst(tree):
+    previous = None
+    nodeOne = None
+    nodeTwo = None
+
+    stack = []
+    node = tree
+
+    while node or stack:
+        if node is not None:
+            stack.append(node)
+            node = node.left
+
+        else:
+            node = stack.pop()
+
+            if previous is not None and previous.value > node.value:
+                if nodeOne is None:
+                    nodeOne = previous
+                nodeTwo = node
+
+            previous = node
+            node = node.right
+
+    nodeOne.value, nodeTwo.value = nodeTwo.value, nodeOne.value
+    return tree
