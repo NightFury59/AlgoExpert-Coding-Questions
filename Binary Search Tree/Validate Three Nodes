@@ -1,0 +1,22 @@
+Solution -
+
+class BST:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+def validateThreeNodes(nodeOne, nodeTwo, nodeThree):
+    return (isChild(nodeOne, nodeTwo) and isChild(nodeTwo, nodeThree)) \
+        or (isChild(nodeThree, nodeTwo) and isChild(nodeTwo, nodeOne))
+
+
+def isChild(node, child):
+    if node is None:
+        return False
+
+    if node is child:
+        return True
+
+    return isChild(node.left if child.value < node.value else node.right, child)
