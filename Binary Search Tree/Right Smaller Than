@@ -1,0 +1,31 @@
+Solution -
+
+def rightSmallerThan(array):
+    class Node:
+        def __init__(self, v):
+            self.value = v
+            self.left = None
+            self.right = None
+
+        def insert(self, v):
+            if v <= self.value:
+                if self.left: self.left.insert(v)
+                else: self.left = Node(v)
+            else:
+                if self.right: self.right.insert(v)
+                else: self.right = Node(v)
+
+        def count_whats_less(self, v):
+            return (self.left.count_whats_less(v) if self.left else 0) + \
+                (self.right.count_whats_less(v) if self.right else 0) + \
+                (1 if self.value < v else 0)
+
+    if not array: return array
+
+    R = [0]
+    t = Node(array[-1])
+    for v in array[-2::-1]:
+        t.insert(v)
+        R.append(t.count_whats_less(v))
+
+    return R[::-1]
