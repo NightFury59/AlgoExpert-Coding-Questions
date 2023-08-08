@@ -1,0 +1,43 @@
+Solution 1 - More Elegant
+
+# Time Complexity O(n) | Space Complexity O(d)
+def invertBinaryTree(tree):
+    if tree is None:
+        return
+    swapLeftAndRight(tree)
+    invertBinaryTree(tree.left)
+    invertBinaryTree(tree.right)
+
+def swapLeftAndRight(tree):
+    tree.left, tree.right = tree.right, tree.left
+
+# This is the class of the input binary tree.
+class BinaryTree:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+Solution 2 - Less Elegant
+
+# Time Complexity O(n) | Space Complexity O(n)
+def invertBinaryTree(tree):
+    queue = [tree]
+    while len(queue) != 0:
+        current = queue.pop(0)
+        if current is None:
+            continue
+        swapLeftAndRight(current)
+        queue.append(current.left)
+        queue.append(current.right)
+
+def swapLeftAndRight(tree):
+    tree.left, tree.right = tree.right, tree.left
+
+
+# This is the class of the input binary tree.
+class BinaryTree:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
