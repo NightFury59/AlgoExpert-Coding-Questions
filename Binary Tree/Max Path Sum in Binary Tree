@@ -1,0 +1,18 @@
+def maxPathSum(tree):
+    maxSum = [tree.value]
+
+    def dfs(tree):
+    #base case
+        if tree is None:
+            return 0
+        # checking left and right
+        left = dfs(tree.left)
+        right = dfs(tree.right)
+        # if left or right is negative, take only one of them
+        maxSum[0] = max(maxSum[0], tree.value + right + left, tree.value+right, tree.value+left)
+        # return the value of current node plus the max
+        # value it can to using its left and right side
+        return tree.value + max(left, right)
+
+    dfs(tree)
+    return maxSum[0]
