@@ -1,0 +1,19 @@
+class BinaryTree:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+def splitBinaryTree(tree):
+    sums = set()
+    total = getSums(tree, sums)
+    return total / 2 if total / 2 in sums else 0
+
+def getSums(tree, sums):
+    if not tree:
+        return 0
+
+    total = getSums(tree.left, sums) + getSums(tree.right, sums) + tree.value
+    sums.add(total)
+    return total
