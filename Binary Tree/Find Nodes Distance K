@@ -1,0 +1,39 @@
+# Time Complexity O(n) | Space Complexity O(n)
+from collections import defaultdict, deque
+class BinaryTree:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+def findNodesDistanceK(tree, target, k):
+    adj = defaultdict(list)
+    def tree_to_graph(node, par):
+        if not node: return
+        if node.left:
+            adj[node.value].append(node.left.value)
+        if node.right:
+            adj[node.value].append(node.right.value)
+        if par:
+            adj[node.value].append(par)
+        tree_to_graph(node.left, node.value)
+        tree_to_graph(node.right, node.value)
+
+    tree_to_graph(tree, None)
+
+    Q = deque([(0, target)])
+    seen = set()
+    ans = []
+    while Q:
+        d, node = Q.popleft()
+        if node in seen: 
+            continue
+        if d > k:
+            break
+        if d == k:
+            ans.append(node)
+        seen.add(node)
+        for neither in adj[node]:
+            Q.append((d+1, neither))
+    return ans
