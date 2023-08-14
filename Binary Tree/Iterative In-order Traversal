@@ -1,0 +1,37 @@
+Solution 1 - Optimal Space
+
+# Time Complexity O(n) | Space Complexity O(1)
+def iterativeInOrderTraversal(tree, callback):
+    previousNode = None
+    currentNode = tree
+    while currentNode is not None:
+        if previousNode is None or previousNode == currentNode.parent:
+            if currentNode.left is not None:
+                nextNode = currentNode.left
+            else:
+                callback(currentNode)
+                nextNode = currentNode.right if currentNode.right is not None else currentNode.parent
+        elif previousNode == currentNode.left:
+            callback(currentNode)
+            nextNode = currentNode.right if currentNode.right is not None else currentNode.parent
+        else:
+            nextNode = currentNode.parent
+        previousNode = currentNode
+        currentNode = nextNode
+
+Solution 2 -
+
+# Time Complexity O(n) | Space Complexity O(n)
+def iterativeInOrderTraversal(tree, callback):
+    stack = []
+    curr = tree
+    while True:
+        if curr is not None:
+            stack.append(curr)
+            curr = curr.left
+        elif(stack):
+            curr = stack.pop()
+            callback(curr)
+            curr = curr.right
+        else:
+            break
