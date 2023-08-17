@@ -1,0 +1,22 @@
+class BinaryTree:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+def rightSiblingTree(root):
+    queue = [(root, 0)]
+    while queue:
+        node, level = queue.pop(0)
+        if node is None:
+            continue
+
+        queue.append((node.left, level + 1))
+        queue.append((node.right, level + 1))
+        nextNode = queue[0]
+        if level == nextNode[1]:
+            node.right = nextNode[0]
+        else:
+            node.right = None
+    return root
