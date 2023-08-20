@@ -1,0 +1,22 @@
+# This is an input class. Do not edit.
+class BinaryTree:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+def compareLeafTraversal(tree1, tree2):
+    leaves1 = getLeafNodes(tree1, [])
+    leaves2 = getLeafNodes(tree2, [])
+    return leaves1 == leaves2
+
+def getLeafNodes(node, array):
+    if node is None:
+        return
+    if node.left is None and node.right is None:
+        array.append(node.value)
+    if node is not None:
+        getLeafNodes(node.left, array)
+        getLeafNodes(node.right, array)
+    return array
