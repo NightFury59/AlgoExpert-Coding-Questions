@@ -1,0 +1,24 @@
+def allKindsOfNodeDepths(root):
+    counter = [0]
+
+    def helper(node, center):
+        if not node:
+            return 0, 0
+
+        leftCount, leftNodes = helper(node.left, counter)
+        rightCount, rightNodes = helper(node.right, counter)
+
+        count = rightCount + leftCount + leftNodes + rightNodes
+        counter[0] += count
+
+        return count, leftNodes + rightNodes + 1
+    helper(root, counter)
+    return counter[0]
+
+
+# This is the class of the input binary tree.
+class BinaryTree:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
