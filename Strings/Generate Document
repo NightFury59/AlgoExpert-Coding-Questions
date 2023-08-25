@@ -1,0 +1,15 @@
+# Time Complexity O(n + m) | Space Complexity O(1)
+def generateDocument(characters, document):
+    charCounts = {}
+
+    for character in characters:
+        if character not in charCounts:
+            charCounts[character] = 0
+        charCounts[character] += 1
+
+    for character in document:
+        if character not in charCounts or charCounts[character] == 0:
+            return False
+
+        charCounts[character] -= 1
+    return True
