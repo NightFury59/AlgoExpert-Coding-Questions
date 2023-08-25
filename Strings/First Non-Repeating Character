@@ -1,0 +1,27 @@
+Solution 1 -
+
+# Time Complexity O(n^2) | Space Complexity O(1)
+def firstNonRepeatingCharacter(string):
+    for idx in range(len(string)):
+        foundDuplicate = False
+        for idx2 in range(len(string)):
+            if string[idx] == string[idx2] and idx != idx2:
+                foundDuplicate = True
+
+        if not foundDuplicate:
+            return idx
+
+    return -1
+
+Solution 2 -
+
+# Time Complexity O(n) | Space Complexity O(1)
+from collections import Counter
+def firstNonRepeatingCharacter(string):
+    charCounts = Counter(string)
+    for i in range(len(string)):
+        if charCounts[string[i]] == 1:
+            return i
+
+    return -1
+    
