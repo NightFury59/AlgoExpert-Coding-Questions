@@ -1,0 +1,12 @@
+def runLengthEncoding(string):
+    ret = ''
+    stack = [string[0]]
+    for s in string[1:]:
+        if stack[-1] == s and len(stack) < 9:
+            stack.append(s)
+        else:
+            ret += str(len(stack)) + stack[-1]
+            stack = [s]
+
+    ret += str(len(stack)) + stack[-1]
+    return ret
