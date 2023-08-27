@@ -1,0 +1,14 @@
+# Time Complexity O(n*m) | Space Complexity O(n * m)
+def semordnilap(words):
+    wordSet = set(words)
+    semordnilapPairs = []
+
+    for word in words:
+        reverse = word[::-1]
+        if reverse in wordSet and reverse != word:
+            semordnilapPairs.append([word, reverse])
+            wordSet.remove(word)
+            wordSet.remove(reverse)
+
+    return semordnilapPairs
+        
