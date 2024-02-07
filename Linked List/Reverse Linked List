@@ -9,10 +9,9 @@ class LinkedList {
 function reverseLinkedList(head) {
   let p1 = null;
   let p2 = head;
-  let p3 = head.next;
 
   while (p2 !== null) {
-    p3 = p2.next;
+    let p3 = p2.next;
     p2.next = p1;
     p1 = p2;
     p2 = p3
