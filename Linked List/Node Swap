@@ -1,0 +1,20 @@
+class LinkedList {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+// 0 -> 1 -> 2 -> 3 -> 4 -> 5
+// O(n) time | O(n) space
+function nodeSwap(head) {
+  if (head === null || head.next === null) return head;
+
+  let nextNode = head.next;
+  head.next = nodeSwap(head.next.next);
+  nextNode.next = head;
+  return nextNode;
+}
+
+exports.nodeSwap = nodeSwap;
+exports.LinkedList = LinkedList;
