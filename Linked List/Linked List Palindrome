@@ -1,0 +1,49 @@
+class LinkedList {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+// O(n) time | O(1) space
+// 0 -> 1 -> 2 -> 2 -> 1 -> 0
+function linkedListPalindrome(head) {
+  let slowNode = head;
+  let fastNode = head;
+
+  while (fastNode !== null && fastNode.next !== null) {
+    slowNode = slowNode.next;
+    fastNode = fastNode.next.next;
+  }
+
+  let reversedSecondHalf = reversedLinkedList(slowNode);
+  let firstHalfNode = head;
+
+  while (reversedSecondHalf !== null) {
+    if (firstHalfNode.value !== reversedSecondHalf.value) {
+      return false;
+    } else {
+    firstHalfNode = firstHalfNode.next;
+    reversedSecondHalf = reversedSecondHalf.next;
+    }
+  }
+
+  return true;
+}
+
+// reversing the linked list
+function reversedLinkedList(slowNode) {
+  let prev = null;
+  let curr = slowNode;
+  while (curr !== null) {
+    let next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
+  return prev;
+}
+
+// Do not edit the lines below.
+exports.LinkedList = LinkedList;
+exports.linkedListPalindrome = linkedListPalindrome;
