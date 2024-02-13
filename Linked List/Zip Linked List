@@ -1,0 +1,64 @@
+class LinkedList {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+// O(n) time | O(1) space
+function zipLinkedList(linkedList) {
+  if (linkedList.next === null || linkedList.next.next === null) return linkedList;
+
+  const firstHalfHead = linkedList;
+  const secondHalfHead = splitLinkedList(linkedList);
+
+  const reversedSecondHalf = reverseLinkedList(secondHalfHead);
+
+  return interweaveLinkedList(firstHalfHead, reversedSecondHalf);
+}
+
+
+function splitLinkedList(linkedList) {
+  let slowIterator = linkedList;
+  let fastIterator = linkedList;
+  while (fastIterator !== null && fastIterator.next !== null) {
+    slowIterator = slowIterator.next;
+    fastIterator = fastIterator.next.next;
+  }
+
+  const secondHalfHead = slowIterator.next;
+  slowIterator.next = null;
+  return secondHalfHead;
+}
+
+function interweaveLinkedList(firstHalfHead, reversedSecondHalfHead) {
+  let linkedList1Iterator = firstHalfHead;
+  let linkedList2Iterator = reversedSecondHalfHead;
+  while (linkedList1Iterator !== null && linkedList2Iterator !== null) {
+    const linkedList1IteratorNext = linkedList1Iterator.next;
+    const linkedList2IteratorNext = linkedList2Iterator.next;
+
+    linkedList1Iterator.next = linkedList2Iterator;
+    linkedList2Iterator.next =linkedList1IteratorNext;
+
+    linkedList1Iterator = linkedList1IteratorNext;
+    linkedList2Iterator = linkedList2IteratorNext;
+  }
+
+  return firstHalfHead;
+}
+
+function reverseLinkedList(head) {
+  let prev = null;
+  let curr = head;
+  while (curr !== null) {
+    const next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
+  return prev;
+}
+// Do not edit the lines below.
+exports.LinkedList = LinkedList;
+exports.zipLinkedList = zipLinkedList;
