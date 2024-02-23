@@ -1,0 +1,28 @@
+// O(n) time | O(n) space
+function reversePolishNotation(tokens) {
+  let stack = [];
+
+  for (let token of tokens) {
+    if (token === "+") {
+      stack.push(stack.pop() + stack.pop());
+    }
+    else if (token === "-") {
+      let firstNum = stack.pop();
+      stack.push(stack.pop() - firstNum);
+    }
+    else if (token === "*") {
+      stack.push(stack.pop() * stack.pop())
+    }
+    else if (token === "/") {
+      let firstNum = stack.pop();
+      stack.push(Math.trunc(stack.pop() / firstNum));
+    }
+    else {
+      stack.push(parseInt(token));
+    }
+  }
+  return stack.pop();
+}
+
+// Do not edit the line below.
+exports.reversePolishNotation = reversePolishNotation;
