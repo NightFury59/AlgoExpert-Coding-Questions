@@ -1,0 +1,66 @@
+1st Solution - Without a stack.
+
+// O(n) time | O(n) space
+function collidingAsteroids(asteroids) {
+  const resultStack = [];
+
+  for (const asteroid of asteroids) {
+    if (asteroid > 0) {
+      resultStack.push(asteroid);
+      continue;
+    }
+    while (true) {
+      const lastStackIdx = resultStack.length - 1;
+      if (resultStack.length === 0 || resultStack[lastStackIdx] < 0) {
+        resultStack.push(asteroid);
+        break;
+      }
+
+      const asteroidSize = Math.abs(asteroid);
+      if (resultStack[lastStackIdx] > asteroidSize) {
+        break;
+      }
+      if (resultStack[lastStackIdx] === asteroidSize) {
+        resultStack.pop();
+        break;
+      }
+
+      resultStack.pop();
+    }
+  }
+
+  return resultStack;
+}
+
+// Do not edit the line below.
+exports.collidingAsteroids = collidingAsteroids;
+
+
+
+2nd Solution - With a stack.
+
+// O(n) time | O(n) space
+function sunsetViews(buildings, direction) {
+  const candidateBuildings = [];
+
+  const startIdx = direction === 'EAST' ? 0 : buildings.length - 1;
+  const step = direction === 'EAST' ? 1 : -1;
+
+  let idx = startIdx;
+  while (idx >= 0 && idx < buildings.length) {
+    const buildingHeight = buildings[idx];
+
+    while (candidateBuildings.length > 0 && buildings[candidateBuildings[candidateBuildings.length - 1]] <= buildingHeight) {
+      candidateBuildings.pop();
+    }
+    candidateBuildings.push(idx);
+
+    idx = idx + step;
+  }
+  if (direction === 'WEST') candidateBuildings.reverse();
+
+  return candidateBuildings;
+}
+
+// Do not edit the line below.
+exports.sunsetViews = sunsetViews;
