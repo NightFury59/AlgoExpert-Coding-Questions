@@ -1,13 +1,41 @@
-def twoNumberSum(array, targetSum):
-    array.sort()
-    left = 0
-    right = len(array) - 1
-    while left < right:
-        CurrentSum = array[left] + array[right]
-        if CurrentSum == targetSum:
-            return [array[left], array[right]]
-        elif CurrentSum < targetSum:
-            left += 1
-        elif CurrentSum > targetSum:
-            right -= 1
-    return []
+Solution 1-
+
+// O(n log(n)) time | O(1) time
+function twoNumberSum(array, targetSum) {
+  const nums = {}
+  for (const num of array) {
+    const potentialMatch = targetSum - num;
+    if (potentialMatch in nums) {
+      return [potentialMatch, num];
+    } else {
+      nums[num] = true;
+    }
+  }
+  return []
+}
+
+// Do not edit the line below.
+exports.twoNumberSum = twoNumberSum;
+
+Solution 2 -
+
+// O(n log(n)) time | O(1) space
+function twoNumberSum(array, targetSum) {
+  array.sort((a, b) => a - b);
+  let left = 0;
+  let right = array.length - 1;
+  while (left < right) {
+    const currentSum = array[left] + array[right];
+    if (currentSum === targetSum) {
+      return [array[left], array[right]];
+    } else if (currentSum > targetSum) {
+      right--;
+    } else {
+      left++;
+     
+  }
+  return []
+}
+
+// Do not edit the line below.
+exports.twoNumberSum = twoNumberSum;
