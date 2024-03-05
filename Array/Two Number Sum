@@ -1,6 +1,7 @@
 Solution 1-
 
 // O(n log(n)) time | O(1) time
+
 function twoNumberSum(array, targetSum) {
   const nums = {}
   for (const num of array) {
@@ -20,6 +21,7 @@ exports.twoNumberSum = twoNumberSum;
 Solution 2 -
 
 // O(n log(n)) time | O(1) space
+
 function twoNumberSum(array, targetSum) {
   array.sort((a, b) => a - b);
   let left = 0;
