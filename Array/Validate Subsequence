@@ -1,25 +1,38 @@
 Solution - 1
-O(n) time | O(1) space.
+// O(n) time | O(1) time
+function isValidSubsequence(array, sequence) {
+  let arr = 0;
+  let seq = 0;
 
-def isValidSubsequence(array, sequence):
-    arrIdx = 0
-    seqIdx = 0
-    while arrIdx < len(array) and seqIdx < len(sequence):
-        if array[arrIdx] == sequence[seqIdx]:
-            seqIdx += 1
-        arrIdx += 1
-    return seqIdx == len(sequence)
+  while(arr < array.length && seq < sequence.length) {
+    if (array[arr] === sequence[seq]) {
+      seq++;
+    }
+    arr++;
+  }
+  return seq === sequence.length
+}
+
+// Do not edit the line below.
+exports.isValidSubsequence = isValidSubsequence;
 
 Solution - 2 
-O(n) Time | O(1) space.
 
-def isValidSubsequence(array, sequence):
-    seqIdx = 0
-    for value in array:
-        if seqIdx == len(sequence):
-            break
-        if sequence[seqIdx] == value:
-            seqIdx += 1
-    return seqIdx == len(sequence)
+// O(n) time | O(1) space
+function isValidSubsequence(array, sequence) {
+  let seq = 0;
+  for (const value of array) {
+    if (seq === sequence.length) {
+      return true
+    }
+    if (sequence[seq] === value) {
+      seq++;
+    }
+  }
+  return seq === sequence.length;
+}
+
+// Do not edit the line below.
+exports.isValidSubsequence = isValidSubsequence;
 
             
