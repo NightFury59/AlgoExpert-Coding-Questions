@@ -1,16 +1,19 @@
-Time Complexity O(n log n) | Space Complexity O(1)
+// O(n log (n)) time | O(1) space
+function nonConstructibleChange(coins) {
+  coins.sort((a, b) => a - b);
 
-Solution -
+  let currentChangeCreated = 0;
 
-def nonConstructibleChange(coins):
-    coins.sort()
+  for (let coin of coins) {
+    if (coin > currentChangeCreated + 1) {
+      return currentChangeCreated + 1;
+    }
+    currentChangeCreated += coin;
+  }
+  return currentChangeCreated + 1;
+}
 
-    currentChangeCreated = 0
-    for coin in coins:
-        if coin > currentChangeCreated + 1:
-            return currentChangeCreated + 1
-
-        currentChangeCreated += coin
-    return currentChangeCreated + 1
+// Do not edit the line below.
+exports.nonConstructibleChange = nonConstructibleChange;
 
         
