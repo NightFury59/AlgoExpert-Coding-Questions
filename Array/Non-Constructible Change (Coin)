@@ -1,19 +1,18 @@
-// O(n log (n)) time | O(1) space
+// O(n log(n)) time | O(1) space
 function nonConstructibleChange(coins) {
-  coins.sort((a, b) => a - b);
+  coins.sort((a, b) => a - b)
 
   let currentChangeCreated = 0;
 
-  for (let coin of coins) {
-    if (coin > currentChangeCreated + 1) {
+  for (let i = 0; i < coins.length; i++) {
+    if (coins[i] > currentChangeCreated + 1) {
       return currentChangeCreated + 1;
     }
-    currentChangeCreated += coin;
+    currentChangeCreated += coins[i];
   }
   return currentChangeCreated + 1;
 }
 
 // Do not edit the line below.
 exports.nonConstructibleChange = nonConstructibleChange;
-
         
