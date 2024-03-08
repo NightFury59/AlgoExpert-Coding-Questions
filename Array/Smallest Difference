@@ -1,27 +1,38 @@
-Time Complexity O(n log n + m log m) | Space Complexity O(1)
+// O(n log(n)) | O(1) 
+function smallestDifference(arrayOne, arrayTwo) {
+  arrayOne.sort((a, b) => a - b);
+  arrayTwo.sort((a, b) => a - b);
 
-Solution - 
+  let i = 0;
+  let j = 0;
+  let smallest = Infinity;
+  let current = Infinity;
+  let smallestPair = [];
 
-def smallestDifference(arrayOne, arrayTwo):
-    arrayOne.sort()
-    arrayTwo.sort()
-    idxOne = 0
-    idxTwo = 0
-    smallest = float("inf")
-    current = float("inf")
-    smallestPair = []
-    while idxOne < len(arrayOne) and idxTwo < len(arrayTwo):
-        firstNum = arrayOne[idxOne]
-        secondNum = arrayTwo[idxTwo]
-        if firstNum < secondNum:
-            current = secondNum - firstNum
-            idxOne += 1
-        elif secondNum < firstNum:
-            current = firstNum - secondNum
-            idxTwo += 1
-        else:
-            return [firstNum,secondNum]
-        if smallest > current:
-            smallest = current
-            smallestPair = [firstNum,secondNum]
-    return smallestPair
+  while (i < arrayOne.length && j < arrayTwo.length) {
+    let firstNum = arrayOne[i];
+    let secondNum = arrayTwo[j];
+
+    if (firstNum < secondNum) {
+      current = secondNum - firstNum;
+      i++;
+    }
+    else if (firstNum > secondNum) {
+      current = firstNum - secondNum;
+      j++;
+    }
+    else if (firstNum === secondNum) {
+      return [firstNum, secondNum];
+    }
+
+    if (current < smallest) {
+      smallest = current;
+      smallestPair = [firstNum, secondNum];
+    }
+  }
+
+  return smallestPair;
+}
+
+// Do not edit the line below.
+exports.smallestDifference = smallestDifference;
