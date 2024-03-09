@@ -1,62 +1,26 @@
-Solution - 1
+// O(n) time | O(m) space
+function arrayOfProducts(array) {
+  let products = new Array(array.length).fill(1);
+  let left = new Array(array.length).fill(1);
+  let right = new Array(array.length).fill(1);
+  
+  let leftRunningProducts = 1;
+  for (let i = 0; i < array.length; i++) {
+    left[i] = leftRunningProducts;
+    leftRunningProducts *= array[i];
+  }
 
-#Time Complexity O(n^2) | Space Complexity O(n)
+  let rightRunningProducts = 1;
+  for (let i = array.length - 1; i >= 0; i--) {
+    right[i] = rightRunningProducts;
+    rightRunningProducts *= array[i];
+  }
 
-def arrayOfProducts(array):
-     products = [1 for _ in range (len(array))]
+  for (let i = 0; i < array.length; i++) {
+    products[i] = left[i] * right[i];
+  }
+  return products
+}
 
-     for i in range(len(array)):
-        runningProduct = 1
-        for j in range(len(array)):
-            if i != j:
-                runningProduct *= array[j]
-        products[i] = runningProduct
-
-     return products
-
-Solution - 2
-
-Time Complexity O(n) | Space Complexity O(n)
-
-
-def arrayOfProducts(array):
-    products = [1 for _ in range(len(array))]
-    leftProducts = [1 for _ in range(len(array))]
-    rightProducts = [1 for _ in range(len(array))]
-    
-    leftRunningProduct = 1
-    for i in range(len(array)):
-        leftProducts[i] = leftRunningProduct
-        leftRunningProduct *= array[i]
-
-    rightRunningProduct = 1
-    for i in reversed(range(len(array))):
-        rightProducts[i] = rightRunningProduct
-        rightRunningProduct *= array[i]
-
-    for i in range(len(array)):
-        products[i] = leftProducts[i] * rightProducts[i]
-   
-    return products
-
-
-Solution 3 -
-
-Time Complexity O(n) | Space Complexity O(n)
-
-
-def arrayOfProducts(array):
-    products = [1 for _ in range(len(array))]
-    
-
-    leftRunningProduct = 1
-    for i in range(len(array)):
-        products[i] = leftRunningProduct
-        leftRunningProduct *= array[i]
-
-    rightRunningProduct = 1
-    for i in reversed(range(len(array))):
-        products[i] *= rightRunningProduct
-        rightRunningProduct *= array[i]
-
-    return products
+// Do not edit the line below.
+exports.arrayOfProducts = arrayOfProducts;
