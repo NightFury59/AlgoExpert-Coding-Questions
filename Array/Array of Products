@@ -1,25 +1,21 @@
-// O(n) time | O(m) space
+// Time Complexity O(n) | Space Complexity O(n)
+
 function arrayOfProducts(array) {
-  let products = new Array(array.length).fill(1);
-  let left = new Array(array.length).fill(1);
-  let right = new Array(array.length).fill(1);
+  const products = new Array(array.length).fill(1);
   
-  let leftRunningProducts = 1;
+  let leftRunningProduct = 1;
   for (let i = 0; i < array.length; i++) {
-    left[i] = leftRunningProducts;
-    leftRunningProducts *= array[i];
+    products[i] = leftRunningProduct;
+    leftRunningProduct *= array[i];
   }
 
-  let rightRunningProducts = 1;
-  for (let i = array.length - 1; i >= 0; i--) {
-    right[i] = rightRunningProducts;
-    rightRunningProducts *= array[i];
+  let rightRunningProduct = 1;
+  for (let i = array.length - 1; i > -1; i--) {
+    products[i] *= rightRunningProduct;
+    rightRunningProduct *= array[i];
   }
 
-  for (let i = 0; i < array.length; i++) {
-    products[i] = left[i] * right[i];
-  }
-  return products
+  return products;
 }
 
 // Do not edit the line below.
