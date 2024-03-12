@@ -1,10 +1,11 @@
-Time Complexity O(n) | Space Complexity O(n)
+// O(n) time | O(n) space
+function firstDuplicateValue(array) {
+  const seen = new Set();
+  for (const val of array) {
+    if (seen.has(val)) return val;
+    seen.add(val);
+  }
+  return -1;
+}
 
-def firstDuplicateValue(array):
-    seen = set()
-
-    for value in array:
-        if value in seen:
-            return value
-        seen.add(value)
-    return -1
+exports.firstDuplicateValue = firstDuplicateValue;
