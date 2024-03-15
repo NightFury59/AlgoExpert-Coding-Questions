@@ -1,18 +1,21 @@
-Solution -
+// O(n) time complexity | O(1) space complexity
 
-Time Complexity O(n) | Space Complexity O(1)
+function majorityElement(array) {
+  let count = 0;
+  answer = null;
 
-def majorityElement(array):
-    count = 0
-    majorityElement = None
+  for (const value of array) {
+    if (count === 0) answer = value;
 
-    for value in array:
-        if count == 0:
-            majorityElement = value
+    if (value === answer) {
+      count++;
+    } else {
+      count--;
+    }
+  }
 
-        if value == majorityElement:
-            count += 1
-        else:
-            count -= 1
+  return answer;
+}
 
-    return majorityElement
+// Do not edit the line below.
+exports.majorityElement = majorityElement;
