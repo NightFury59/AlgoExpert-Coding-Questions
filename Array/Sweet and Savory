@@ -1,25 +1,29 @@
-Solution -
+// Sorted dishes - [-5, -3, 1, 7]
+function sweetAndSavory(dishes, target) {
+  dishes.sort((a, b) => a - b);
+  let bestPair = [0, 0];
+  let bestDiff = Infinity;
+  let left = 0;
+  let right = dishes.length - 1
 
-Time Complexity O(n log n) | Space Complexity O(n)
+  while (dishes[left] < 0 && dishes[right] > 0) {
+    const dishSum = dishes[left] + dishes[right];
+    if (dishSum === target) {
+      bestPair = [dishes[left], dishes[right]];
+    }
+    if (dishSum > target) {
+      right--;
+    } else {
+    const currDiff = target - dishSum;
+    if (currDiff < bestDiff) {
+      bestPair = [dishes[left], dishes[right]];
+      bestDiff = currDiff;
+    }
+    left++;
+    }
+  }
+  return bestPair;
+}
 
-def sweetAndSavory(dishes, target):
-    sweetDishes = sorted([dish for dish in dishes if dish < 0], key = abs)
-    savoryDishes = sorted([dish for dish in dishes if dish > 0])
-
-    bestPair = [0, 0]
-    bestDifference = float('inf')
-    sweetIndex, savoryIndex = 0, 0
-
-    while sweetIndex < len(sweetDishes) and savoryIndex < len(savoryDishes):
-        currentSum = sweetDishes[sweetIndex] + savoryDishes[savoryIndex]
-
-        if currentSum <= target:
-            currentDifference = target - currentSum
-            if currentDifference < bestDifference:
-                bestDifference = currentDifference
-                bestPair = [sweetDishes[sweetIndex], savoryDishes[savoryIndex]]
-            savoryIndex += 1
-        else:
-            sweetIndex += 1
-
-    return bestPair
+// Do not edit the line below.
+exports.sweetAndSavory = sweetAndSavory;
