@@ -1,24 +1,29 @@
-Solution -
+// O(N^2) time | O(N^2) space
+function fourNumberSum(array, targetSum) {
+  let hashTable = {};
+  let result = [];
 
-#Time Complexity O(n^2) | Space Complexity O(n^2)
+  for (let i = 1; i < array.length - 1; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      const currentSum = array[i] + array[j];
+      const difference = targetSum - currentSum;
+      if (difference in hashTable) {
+        for (let pair of hashTable[difference]) {
+          result.push(pair.concat([array[i], array[j]]));
+        }
+      }
+    }
+    for (let k = 0; k < i; k++) {
+      const currentSum = array[k] + array[i];
+      if (!(currentSum in hashTable)) {
+        hashTable[currentSum] = [[array[k], array[i]]]
+      } else {
+        hashTable[currentSum].push([array[k], array[i]]);
+      }
+    }
+  }
+  return result;
+}
 
-def fourNumberSum(array, targetSum):
-    allPairSums = {}
-    quadruplets = []
-
-    for i in range(1, len(array) - 1):
-        for j in range(i + 1, len(array)):
-            currentSum = array[i] + array[j]
-            difference = targetSum - currentSum
-            if difference in allPairSums:
-                for pair in allPairSums[difference]:
-                    quadruplets.append(pair + [array[i], array[j]])
-
-        for k in range(0, i):
-            currentSum = array[i] + array[k]
-            if currentSum not in allPairSums:
-                allPairSums[currentSum] = [[array[k], array[i]]]
-            else:
-                allPairSums[currentSum].append([array[k], array[i]])
-
-    return quadruplets
+// Do not edit the line below.
+exports.fourNumberSum = fourNumberSum;
