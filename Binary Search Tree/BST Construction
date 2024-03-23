@@ -61,6 +61,7 @@ class BST:
                 self.value = successor.value
                 self.right = self.right.remove(successor.value)
 
+
         return self
 
     def inOrderSuccessor(self):
