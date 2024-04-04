@@ -1,0 +1,36 @@
+// O(log(min(n, m))) | O(1) space
+function medianOfTwoSortedArrays(arrayOne, arrayTwo) {
+  const smallArray = arrayOne.length <= arrayTwo.length ? arrayOne : arrayTwo;
+  const bigArray = arrayOne.length > arrayTwo.length ? arrayOne : arrayTwo;
+
+  let leftIdx = 0;
+  let rightIdx = smallArray.length - 1;
+  let mergedLeftIdx = Math.floor((smallArray.length + bigArray.length - 1) / 2);
+
+  while (true) {
+    const smallPartitionIdx = Math.floor((leftIdx + rightIdx) / 2);
+    const bigPartitionIdx = mergedLeftIdx - smallPartitionIdx - 1;
+
+    const smallMaxLeftValue = smallPartitionIdx >= 0 ? smallArray[smallPartitionIdx] : -Infinity;
+    const smallMinRightValue = smallPartitionIdx + 1 < smallArray.length ? smallArray[smallPartitionIdx + 1] : Infinity;
+    const bigMaxLeftValue = bigPartitionIdx >= 0 ? bigArray[bigPartitionIdx] : -Infinity;
+    const bigMinRightValue = bigPartitionIdx + 1 < bigArray.length ? bigArray[bigPartitionIdx + 1] : Infinity;
+
+    if (smallMaxLeftValue > bigMinRightValue) {
+      rightIdx = smallPartitionIdx - 1;
+    } else if (bigMaxLeftValue > smallMinRightValue) {
+      leftIdx = smallPartitionIdx + 1;
+    } else {
+      if ((smallArray.length + bigArray.length) % 2 === 0) {
+        return (
+          (Math.max(smallMaxLeftValue, bigMaxLeftValue) +
+           Math.min(smallMinRightValue, bigMinRightValue)) / 2
+        );
+      }
+      return Math.max(smallMaxLeftValue, bigMaxLeftValue);
+    }
+  }
+}
+
+// Do not edit the line below.
+exports.medianOfTwoSortedArrays = medianOfTwoSortedArrays;
