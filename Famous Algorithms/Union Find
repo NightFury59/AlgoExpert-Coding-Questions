@@ -1,0 +1,33 @@
+class UnionFind {
+  constructor() {
+    this.parent = {};
+  }
+
+  createSet(value) {
+    this.parent[value] = value;
+  }
+
+  find(value) {
+    if (!this.parent.hasOwnProperty(value)) {
+      return null;
+    }
+
+    let pValue = value;
+    while(this.parent[pValue] !== pValue) {
+      pValue = this.parent[pValue]
+    }
+    return pValue;
+  }
+
+  union(valueOne, valueTwo) {
+    const v1 = this.find(valueOne);
+    const v2 = this.find(valueTwo);
+
+    if (v1 == null | v2 == null) return;
+
+    this.parent[v2] = this.parent[v1];
+  }
+}
+
+// Do not edit the line below.
+exports.UnionFind = UnionFind;
