@@ -1,23 +1,33 @@
-# Time Complexity O(nlog(n)) | Sapce Complexity O(1)
-def tandemBicycle(redShirtSpeeds, blueShirtSpeeds, fastest):
-    redShirtSpeeds.sort()
-    blueShirtSpeeds.sort()
+// O(nlog(n)) time | O(1) space
 
-    if not fastest:
-        reverseArrayInPlace(redShirtSpeeds)
+function tandemBicycle(redShirtSpeeds, blueShirtSpeeds, fastest) {
+  redShirtSpeeds.sort((a, b) => a - b); // Sort in ascending order (default)
+  blueShirtSpeeds.sort((a, b) => a - b); // Sort in ascending order for efficiency
 
-    totalSpeed = 0
-    for idx in range(len(redShirtSpeeds)):
-        rider1 = redShirtSpeeds[idx]
-        rider2 = blueShirtSpeeds[len(blueShirtSpeeds) - idx - 1]
-        totalSpeed += max(rider1, rider2)
+  if (!fastest) {
+    reverseArrayInPlace(redShirtSpeeds); // Reverse only if not prioritizing fastest pairing
+  }
 
-    return totalSpeed
+  let totalSpeed = 0;
+  for (let i = 0; i < redShirtSpeeds.length; i++) {
+    const rider1 = redShirtSpeeds[i];
+    const rider2 = blueShirtSpeeds[blueShirtSpeeds.length - i - 1]; // Access from the end for efficient pairing
+    totalSpeed += Math.max(rider1, rider2);
+  }
 
-def reverseArrayInPlace(array):
-    start = 0
-    end = len(array) - 1
-    while start < end:
-        array[start], array[end] = array[end], array[start]
-        start += 1
-        end -= 1
+  return totalSpeed;
+}
+
+function reverseArrayInPlace(array) {
+  let start = 0;
+  let end = array.length - 1;
+  while (start < end) {
+    const temp = array[start];
+    array[start] = array[end];
+    array[end] = temp;
+    start++;
+    end--;
+  }
+}
+
+exports.tandemBicycle = tandemBicycle;
